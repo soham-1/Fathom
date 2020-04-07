@@ -5,7 +5,7 @@ from PIL import ImageTk, Image
 import mysql.connector 
 import itertools
 
-myconnector = mysql.connector.connect(host='localhost', user='root', passwd="Soham@123", database="tinder")
+myconnector = mysql.connector.connect(host='localhost', user='root', passwd="", database="fathom")
 mycursor = myconnector.cursor()
 
 class tinderapp(Tk):
