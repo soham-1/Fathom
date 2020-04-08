@@ -14,7 +14,7 @@ class tinderapp(Tk):
         self._frame = None
         self.switch_frame(signup)
         self.geometry("700x500")
-        self.title("tinder")
+        self.title("Fathom")
         print(self._frame)  #for debugging
         def donothing():
             pass
@@ -235,8 +235,6 @@ class request(Frame):
 
                     if match[2]==1 and match[3]==1:
                         Label(self, text="accepted").grid(row=i, column=1)
-                        self.master.target = match[1]
-                        Button(self, text="chatbox", command= lambda : self.master.switch_frame(messages)).grid(row=i, column=1)
                     
                     elif match[2]==1 and match[3] is None:
                         Label(self, text="pending").grid(row=i, column=1)
@@ -248,10 +246,11 @@ class request(Frame):
                     Button(self, text="accept request", command= lambda : self.accept(match)).grid(row=i,column=2)
 
                 elif match[1]==username and match[2]==1 and match[3]==1:
-                    Label(self, text=f"{match[0]}").grid(row=i, column=0)
-                    self.master.target = match[0]
-                    Button(self, text="chatbox", command= lambda : self.master.switch_frame(messages)).grid(row=i, column=1)
-
+                    Label(self, text=f"{match[0]}").grid(row=i, column=0
+        chat=StringVar()
+        chat.set('enter name')
+        Entry(self, textvariable=chat).grid(row=100,column=1)
+        Button(self, text='open chat box', command= lambda : self.open_chatbox(chat.get())).grid(row=100,column=2)    
     
     def accept(self, match):
         username = match[0]
@@ -260,7 +259,10 @@ class request(Frame):
         mycursor.execute(f" update request set accept = 1 where username=\'{username}\' and target=\'{target}\' ")
         myconnector.commit()
         tkmsg.showinfo(title=request, message="request accepted")
-
+                                                         
+    def open_chatbox(self, chat):
+        self.master.target = chat
+        self.master.switch_frame(messages)
 
 class messages(Frame):
     def __init__(self, master):
@@ -269,7 +271,7 @@ class messages(Frame):
         user = self.master.user_entry
         reciever = self.master.target
         print(reciever) #for debugging
-        mycursor.execute(f" select * from chatbox where sender = \'{user}\' or reciever = \'{user}\' ")
+        mycursor.execute(f" select * from chatbox where ( (sender = \'{user}\' and receiver = \'{receiver}\' ) or (sender = \'{receiver}\' and receiver = \'{user}\' )) ")
         result = mycursor.fetchall()
         if result is not None:
             for (message,i) in zip(result, range(len(result)) ):
