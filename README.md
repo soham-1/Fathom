@@ -15,7 +15,7 @@ python, tkinter , mysql-connetor-python, PIL
 
 execute the mysql_setup.py file first.
 this will create all the required database in your mysql workbench.
-####change the username and passwd of mysql connector accordingly.
+<b>change the username and passwd of mysql connector accordingly.</b>
 
 ### built with:
 tkinter - gui
