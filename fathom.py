@@ -5,10 +5,10 @@ from PIL import ImageTk, Image
 import mysql.connector 
 import itertools
 
-myconnector = mysql.connector.connect(host='localhost', user='root', passwd="Soham@123", database="tinder")
+myconnector = mysql.connector.connect(host='localhost', user='root', passwd="", database="fathom")
 mycursor = myconnector.cursor()
 
-class tinderapp(Tk):
+class fathomapp(Tk):
     def __init__(self):
         super().__init__()
         self._frame = None
@@ -315,7 +315,7 @@ class messages(Frame):
 
 
 if __name__ == "__main__":
-    window = tinderapp()
+    window = fathomapp()
     window.configure(bg='lightblue')
     window.geometry(f"{window.winfo_screenwidth()}x{window.winfo_screenheight()}")
     window.mainloop()
