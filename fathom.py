@@ -53,7 +53,7 @@ class fathomapp(Tk):
 
 class signup(Frame):
     def __init__(self, master):
-        Frame.__init__(self, master,bg='lightblue')
+        Frame.__init__(self, master,bg='lightblue', padx=500, pady=250)
         Frame.configure(self)
         
         user_entry = StringVar() 
@@ -86,7 +86,7 @@ class signup(Frame):
 
 class Login(Frame):
     def __init__(self, master):
-        Frame.__init__(self, master,bg='lightblue')
+        Frame.__init__(self, master,bg='lightblue', padx=500, pady=250)
         Frame.configure(self)
         user_entry = StringVar() 
         pass_entry = StringVar()
@@ -190,7 +190,7 @@ class profile(Frame):
 
 class homepage(Frame):
     def __init__(self, master):
-        Frame.__init__(self, master,bg='lightblue')
+        Frame.__init__(self, master,bg='lightblue', padx=400, pady=150)
         Frame.configure(self)
 
         user = self.master.user_entry
@@ -211,7 +211,7 @@ class homepage(Frame):
 
     def create_slide_show(self, img1, i=0):
         img = Image.open(f'{img1[i]}')
-        img = img.resize((200,200), Image.ANTIALIAS)
+        img = img.resize((300,300), Image.ANTIALIAS)
         mylabel = ImageTk.PhotoImage(img)
         ImageLabel = Label(self, image=mylabel, bg='lightblue')
         ImageLabel.image = mylabel
@@ -229,9 +229,9 @@ class homepage(Frame):
         mycursor.execute(fr" select bio from user_profile where img = '{next_img}' ")
         bio = mycursor.fetchone()
         Label(self, text=f"{bio[0]}", bg='lightblue', width=40).grid(row=4,column=5)
-        Button(self, text='next', command= lambda : self.create_slide_show(img1, i=i+1)).grid(row=5, column=3)
-        Button(self, text='back', command= lambda : self.create_slide_show(img1, i=i-1)).grid(row=5, column=1)
-        Button(self, text='send request', command= lambda : self.send_request(name)).grid(row=5, column=2)
+        Button(self, text='next', padx=15, command= lambda : self.create_slide_show(img1, i=i+1)).grid(row=5, column=3)
+        Button(self, text='back', padx=15, command= lambda : self.create_slide_show(img1, i=i-1)).grid(row=5, column=1)
+        Button(self, text='send request', padx=15, command= lambda : self.send_request(name)).grid(row=5, column=2)
     
     def send_request(self, target):
         username = self.master.user_entry
@@ -268,11 +268,12 @@ class request(Frame):
 
                 elif match[1]==username and match[2]==1 and match[3]==1:
                     Label(self, text=f"{match[0]}", bg='lightblue').grid(row=i, column=0)
+                    Label(self, text="accepted", bg='lightblue').grid(row=i, column=1)
 
         chat=StringVar()
         chat.set('enter name')
         Entry(self, textvariable=chat).grid(row=100,column=1)
-        Button(self, text='open chat box', command= lambda : self.open_chatbox(chat.get())).grid(row=100,column=2)
+        Button(self, text='open chat box', font=("Calibri",13,"italic"), bg="crimson", fg="pink", padx=25, bd=5, relief=GROOVE, command= lambda : self.open_chatbox(chat.get())).grid(row=100,column=2)
 
     def accept(self, match):
         username = match[0]
