@@ -1,18 +1,18 @@
 import mysql.connector
 
 mydb = mysql.connector.connect(host='localhost',user='root',passwd='')
-mc = mydb.cursor()
+mycursor = mydb.cursor()
 
-mc.execute('Create database Fathom')
+mycursor.execute('Create database Fathom')
 
-mc.close()
+mycursor.close()
 mydb.close()
 
 mydb = mysql.connector.connect(host='localhost',user='root',passwd='',database='Fathom')
-mc = mydb.cursor()
+mycursor = mydb.cursor()
 
-mc.execute('Create table accounts(username varchar(50) primary key ,password varchar(50) not null)')
-mc.execute('''Create table user_profile(username varchar(50) primary key,
+mycursor.execute('Create table accounts(username varchar(50) primary key, user_password varchar(50) not null)')
+mycursor.execute('''Create table user_profile(username varchar(50) primary key,
       img varchar(100) ,
       sex char not null,
       interest varchar(20) not null,
@@ -21,7 +21,7 @@ mc.execute('''Create table user_profile(username varchar(50) primary key,
       references accounts(username)
       on delete cascade
       on update cascade)''')
-mc.execute('''Create table request(
+mycursor.execute('''Create table request(
 	username varchar(50) ,
     target varchar(50), 
     sent_request int ,
@@ -32,13 +32,13 @@ mc.execute('''Create table request(
     on update cascade,
     primary key(username,target)
 )''')
-mc.execute('''Create table chatbox(
+mycursor.execute('''Create table chatbox(
 	msg_id int not null AUTO_INCREMENT primary key,
 	sender varchar(50) not null , 
     reciever varchar(50) not null,
     message varchar(100) not null
 )''')
 
-mc.close()
+mycursor.close()
 mydb.close()
 
