@@ -35,7 +35,7 @@ mycursor.execute('''Create table request(
 mycursor.execute('''Create table chatbox(
 	msg_id int not null AUTO_INCREMENT primary key,
 	sender varchar(50) not null , 
-    reciever varchar(50) not null,
+    receiver varchar(50) not null,
     message varchar(100) not null
 )''')
 
