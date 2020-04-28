@@ -263,8 +263,9 @@ class request(Frame):
                 elif match[1]==username and match[2]==1 and match[3] is None:
                     Label(self, text=f"{match[0]}", bg='lightblue').grid(row=i, column=0)
                     print(match[1])     #for debugging
+                    current_row = match
                     Label(self, text="sent to you", bg='lightblue').grid(row=i, column=1)
-                    Button(self, text="accept request", command= lambda : self.accept(match)).grid(row=i,column=2)
+                    Button(self, text="accept request", command= lambda : self.accept(current_row)).grid(row=i,column=2)
 
                 elif match[1]==username and match[2]==1 and match[3]==1:
                     Label(self, text=f"{match[0]}", bg='lightblue').grid(row=i, column=0)
